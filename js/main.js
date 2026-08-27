@@ -1,164 +1,11 @@
-<!DOCTYPE html>
-<html lang="sr-RS">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Teniski klub AS-NS — teniski tereni, SC Karović, Vrnjačka Banja</title>
-  <meta name="description" content="Teniski klub AS-NS, Vrnjačka Banja. Četiri terena crvene šljake i zatvoreni teren cele godine, u sportskom centru Karović, dva kilometra od centra Banje. Rezervacija termina: 063 681 739.">
-  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
-  <meta name="author" content="Teniski klub AS-NS">
-  <meta name="theme-color" content="#16130F">
-  <link rel="canonical" href="https://PROMENI-DOMEN.rs/">
-  <link rel="icon" href="slike/logo-zeleni-disk.webp" type="image/webp">
-  <link rel="apple-touch-icon" href="slike/logo-zeleni-disk.webp">
+/* ============================================================================
+   AS-NS — logika sajta
+   ----------------------------------------------------------------------------
+   Klasu ucitava js/support.js i vezuje je za markup u index.html.
+   Detaljan opis (stanje, props, sta radi mount) je u komentaru ispod.
+   ========================================================================= */
 
-  <meta property="og:type" content="website">
-  <meta property="og:locale" content="sr_RS">
-  <meta property="og:site_name" content="Teniski klub AS-NS">
-  <meta property="og:title" content="Teniski klub AS-NS — teniski tereni u Vrnjačkoj Banji">
-  <meta property="og:description" content="Četiri terena crvene šljake i zatvoreni teren cele godine, dva kilometra od centra Vrnjačke Banje. Rezervacija termina: 063 681 739.">
-  <meta property="og:url" content="https://PROMENI-DOMEN.rs/">
-  <meta property="og:image" content="https://PROMENI-DOMEN.rs/slike/hero.webp">
-  <meta property="og:image:alt" content="Tereni od crvene šljake u sportskom centru Karović">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Teniski klub AS-NS — teniski tereni u Vrnjačkoj Banji">
-  <meta name="twitter:description" content="Četiri terena crvene šljake i zatvoreni teren cele godine. Rezervacija: 063 681 739.">
-  <meta name="twitter:image" content="https://PROMENI-DOMEN.rs/slike/hero.webp">
-
-  <meta name="geo.region" content="RS-00">
-  <meta name="geo.placename" content="Vrnjačka Banja">
-  <meta name="geo.position" content="43.6264013;20.865555">
-  <meta name="ICBM" content="43.6264013, 20.865555">
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-  <link rel="preload" as="image" href="slike/hero.webp" fetchpriority="high">
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&amp;family=Manrope:wght@500;600;700;800&amp;display=swap" rel="stylesheet">
-
-  <script type="application/ld+json">
-  {
-  "@context": "https://schema.org",
-  "@graph": [
-  {
-  "@type": ["SportsActivityLocation", "LocalBusiness"],
-  "@id": "https://PROMENI-DOMEN.rs/#klub",
-  "name": "Teniski klub AS-NS",
-  "alternateName": ["AS-NS Karović", "Teniski tereni Vrnjačka Banja"],
-  "description": "Teniski klub sa četiri terena crvene šljake i jednim zatvorenim terenom, u sportskom centru Karović, dva kilometra od centra Vrnjačke Banje. Domaćin ITF turnira Vrnjačka Banja Open od 2013.",
-  "url": "https://PROMENI-DOMEN.rs/",
-  "image": "https://PROMENI-DOMEN.rs/slike/hero.webp",
-  "logo": "https://PROMENI-DOMEN.rs/slike/logo-zeleni.webp",
-  "telephone": "+381636817390",
-  "email": "skarovic@mts.rs",
-  "currenciesAccepted": "RSD",
-  "paymentAccepted": "Gotovina",
-  "address": {
-  "@type": "PostalAddress",
-  "streetAddress": "Novo Selo 883",
-  "postalCode": "36210",
-  "addressLocality": "Vrnjačka Banja",
-  "addressCountry": "RS"
-  },
-  "geo": { "@type": "GeoCoordinates", "latitude": 43.6264013, "longitude": 20.865555 },
-  "hasMap": "https://www.google.com/maps/place/AS-NS+Karovic/@43.6264013,20.865555,17z",
-  "openingHoursSpecification": [{
-  "@type": "OpeningHoursSpecification",
-  "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
-  "opens": "00:00",
-  "closes": "23:59"
-  }],
-  "sameAs": [
-  "https://www.facebook.com/tennisvb/?locale=sr_RS",
-  "https://www.instagram.com/explore/locations/1760614960817436/teniski-klub-as-ns-vrnjacka-banja/"
-  ],
-  "sport": ["Tenis", "Mali fudbal"],
-  "amenityFeature": [
-  { "@type": "LocationFeatureSpecification", "name": "Četiri terena crvene šljake", "value": true },
-  { "@type": "LocationFeatureSpecification", "name": "Zatvoreni teren cele godine", "value": true },
-  { "@type": "LocationFeatureSpecification", "name": "Reflektori za večernje termine", "value": true },
-  { "@type": "LocationFeatureSpecification", "name": "Svlačionice i tuševi", "value": true },
-  { "@type": "LocationFeatureSpecification", "name": "Besplatan parking", "value": true },
-  { "@type": "LocationFeatureSpecification", "name": "Bar i terasa", "value": true }
-  ],
-  "makesOffer": [
-  { "@type": "Offer", "name": "Termin na terenu od crvene šljake", "description": "Termin traje 60 minuta." },
-  { "@type": "Offer", "name": "Termin na zatvorenom terenu", "description": "Zatvoreni teren sa veštačkom travom, dostupan cele godine." },
-  { "@type": "Offer", "name": "Mali fudbal", "description": "Teren sa veštačkom travom." },
-  { "@type": "Offer", "name": "Zakup celog kompleksa", "description": "Za team building i proslave." }
-  ]
-  },
-  {
-  "@type": "WebSite",
-  "@id": "https://PROMENI-DOMEN.rs/#sajt",
-  "url": "https://PROMENI-DOMEN.rs/",
-  "name": "Teniski klub AS-NS",
-  "inLanguage": "sr-RS",
-  "publisher": { "@id": "https://PROMENI-DOMEN.rs/#klub" }
-  },
-  {
-  "@type": "FAQPage",
-  "@id": "https://PROMENI-DOMEN.rs/#pitanja",
-  "mainEntity": [
-  { "@type": "Question", "name": "Kako se rezerviše termin?", "acceptedAnswer": { "@type": "Answer", "text": "Preko kalendara na sajtu ili pozivom na 063 681 739." } },
-  { "@type": "Question", "name": "Šta ako pada kiša?", "acceptedAnswer": { "@type": "Answer", "text": "Igra se pod krovom na zatvorenom terenu ako je slobodan, ili se termin pomera bez naplate." } },
-  { "@type": "Question", "name": "Može li da se igra uveče?", "acceptedAnswer": { "@type": "Answer", "text": "Može, tereni imaju reflektore. Kompleks radi 24 sata." } },
-  { "@type": "Question", "name": "Ima li svlačionica i tuševa?", "acceptedAnswer": { "@type": "Answer", "text": "Ima, u zgradi uz bar pored terena." } },
-  { "@type": "Question", "name": "Gde se parkira?", "acceptedAnswer": { "@type": "Answer", "text": "Na parkingu ispred ulaza u kompleks. Parking je besplatan." } },
-  { "@type": "Question", "name": "Gde se nalaze tereni?", "acceptedAnswer": { "@type": "Answer", "text": "U sportskom centru Karović, Novo Selo 883, 36210 Vrnjačka Banja, dva kilometra od centra Banje." } }
-  ]
-  }
-  ]
-  }
-  </script>
-  <link rel="stylesheet" href="css/style.css">
-  <template id="__bundler_thumbnail">
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="#C4552A"></rect><g fill="none" stroke="#FFF4E8" stroke-width="3" stroke-linecap="round"><ellipse cx="56" cy="42" rx="17" ry="20" transform="rotate(-38 56 42)"></ellipse><path d="M43 57 26 77"></path><path d="M42 26 71 53"></path><path d="M35 37 60 60"></path></g></svg>
-  </template>
-</head>
-<body>
-
-<!--
-  ============================================================================
-  STRUKTURA PROJEKTA
-  ============================================================================
-    index.html        ova stranica (markup svih sekcija, sa inline stilovima)
-    404.html          stranica za nepostojece adrese
-    css/style.css     globalna pravila (reset, prelazi, keyframes)
-    js/main.js        logika sajta (animacije, mobilni raspored, kalendar)
-    js/support.js     runtime koji vezuje js/main.js za markup
-    slike/            fotografije (.webp za velike, .png za male kvadratne)
-    robots.txt        dozvole za pretrazivace i AI botove
-    sitemap.xml       mapa sajta
-    README.md         uputstvo za postavljanje i izmene
-
-  Mapa sekcija i objasnjenje data-* atributa su u komentaru ispod.
-  ============================================================================
--->
-
-<x-dc>
-<!--
-  ============================================================================
-  TENISKI KLUB AS-NS — jednostrani sajt (Design Component)
-  ============================================================================
-  Struktura dokumenta, u redu pojavljivanja:
-
-    <header data-nav>     fiksna traka + mobilni meni (#vrh, #o-nama, ...)
-    #vrh                  hero: naslov, CTA, kartica turnira, brojke, traka
-    #o-nama               predstavljanje kluba + kartice terena
-    (brojke)              statistika sa count-up animacijom (data-count)
-    #usluge               sta se moze zakazati + kartice usluga
-    (traka)               beskonacna traka fotografija (@keyframes traka)
-    #turniri              ITF turnir, ukljucuje/iskljucuje prop prikaziTurnire
-    #galerija             fotografije, dopunski red iza dugmeta "Jos slika"
-    #cene                 cenovnik i clanarina
-    (CTA + prijava)       poziv na rezervaciju + mejl prijava za turnire
-    #blog                 novosti, ukljucuje/iskljucuje prop prikaziBlog
-    #faq                  pitanja iz Component.PITANJA (akordeon)
-    #lokacija             adresa, kontakt, Google mapa
-    #rezervacija          koraci + prikaz kalendara (mockup, ne pravi booking)
-    <footer>              kontakt kolone, brojevi terena, veliki AS-NS znak
-
-  Konvencije koje logika ocekuje (vidi <script data-dc-script> na dnu fajla):
+na dnu fajla):
     data-reveal-group   omotac sekcije; stagger se racuna unutar grupe
     data-reveal         element koji ulazi u kadar (fade + rise)
     data-img            reveal varijanta za slike (clip-path otkrivanje)
@@ -711,9 +558,425 @@
     </div>
   </footer>
 </div>
-</x-dc>
 
-<script src="js/support.js"></script>
-<script data-dc-script data-props="{&quot;prikaziBlog&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Sekcije&quot;},&quot;prikaziTurnire&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Sekcije&quot;},&quot;animacije&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Ponašanje&quot;}}" src="js/main.js"></script>
-</body>
-</html>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;prikaziBlog&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Sekcije&quot;},&quot;prikaziTurnire&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Sekcije&quot;},&quot;animacije&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Ponašanje&quot;}}">
+/*
+  ============================================================================
+  LOGIKA SAJTA
+  ============================================================================
+  Sve se svodi na cetiri grupe:
+
+  1. STANJE (state)
+     viseSlika       da li je otvoren dopunski red galerije
+     mejlPrijava     tekst u polju za prijavu na obavestenja o turnirima
+     prijavaPoslata  posle slanja se forma zamenjuje potvrdom
+     otvoreno        indeks otvorenog pitanja u FAQ akordeonu (-1 = zatvoreno)
+     meniOtvoren     mobilni meni
+
+  2. PROPS (podesavanja u Tweaks panelu)
+     prikaziBlog     ukljucuje sekciju #blog
+     prikaziTurnire  ukljucuje sekciju #turniri
+     animacije       false = bez animacija i bez JS rasporeda (cist prikaz)
+
+  3. componentDidMount — sve sto trazi DOM, po redu:
+     primeniNav        boja fiksne trake (tamna van heroa, providna u herou)
+     primeniMobilni    mobilni raspored kroz listu "pravila" (bez media query-ja)
+     layoutGrids       broj kolona po data-cols, bez praznih celija
+     pripremi/show     reveal animacije (fade + rise, clip-path za slike)
+     runCount          odbrojavanje brojeva sa data-count
+     finoSkrolovanje   inercija skrola (samo mis/trackpad, respektuje
+                       prefers-reduced-motion)
+     parallax          lagano pomeranje hero slike
+     check             jedan prolaz koji sve gore poziva; vezan na scroll,
+                       resize i interval od 250 ms
+
+  4. renderVals — vrednosti koje sablon cita: dani kalendara, termini,
+     pitanja, tekstovi dugmadi i handleri.
+
+  Sve slusace koje mount postavi, componentWillUnmount uklanja.
+  ============================================================================
+*/
+class Component extends DCLogic {
+  state = { viseSlika: false, mejlPrijava: '', prijavaPoslata: false, otvoreno: 0, meniOtvoren: false };
+
+  static PITANJA = [
+    ['Kako se rezerviše termin?', 'Preko kalendara ispod ili pozivom na 063 681 739.'],
+    ['Šta ako pada kiša?', 'Igraš pod krovom ako je slobodno, ili pomeriš termin bez naplate.'],
+    ['Može li da se igra uveče?', 'Može, tereni imaju reflektore. Kompleks radi 24 sata.'],
+    ['Iznajmljujete li rekete i loptice?', '[DOPUNITI: da li se iznajmljuje oprema i po kojoj ceni]'],
+    ['Ima li svlačionica i tuševa?', 'Ima, u zgradi, uz bar pored terena.'],
+    ['Kako se dete upisuje u školu tenisa?', '[DOPUNITI: da li postoji škola tenisa, uzrasti, trener, način upisa]'],
+    ['Gde se parkira?', 'Na parkingu ispred ulaza. Besplatan je.'],
+    ['Može li zakup celog kompleksa?', 'Može, za team building i rođendane. Cena · [DOPUNITI]']
+  ];
+
+  componentDidMount() {
+    // jezik dokumenta (SEO): postavlja se pre svega ostalog
+    document.documentElement.lang = 'sr-RS';
+    if (this.props.animacije === false) return;
+    const ease = 'cubic-bezier(.22,.68,.28,1)';
+
+    // 1. reveal: fade + rise, sa stagger-om unutar sekcije
+    const groups = new Map();
+    const pripremi = n => {
+      if (n.dataset.pripremljen === '1') return;
+      n.dataset.pripremljen = '1';
+      const g = n.closest('[data-reveal-group]') || document.body;
+      const arr = groups.get(g) || [];
+      arr.push(n);
+      groups.set(g, arr);
+      if (n.dataset.img === '1') {
+        n.style.willChange = 'clip-path, transform, opacity';
+        n.style.transition = 'clip-path 1.05s ' + ease + ', transform 1.15s ' + ease + ', opacity .5s linear';
+        n.style.clipPath = 'inset(0% 0% 100% 0%)';
+        n.style.transform = 'scale(1.05)';
+        n.style.opacity = '1';
+      } else {
+        n.style.willChange = 'opacity, transform';
+        n.style.transition = 'opacity .8s ' + ease + ', transform .8s ' + ease;
+        n.style.opacity = '0';
+        n.style.transform = 'translateY(28px)';
+      }
+    };
+    const sviReveal = () => Array.from(document.querySelectorAll('[data-reveal]'));
+    sviReveal().forEach(pripremi);
+    const delayOf = n => {
+      const arr = groups.get(n.closest('[data-reveal-group]') || document.body) || [];
+      return Math.min(arr.indexOf(n), 5) * 90;
+    };
+    const show = n => {
+      if (n.dataset.shown === '1') return;
+      n.dataset.shown = '1';
+      setTimeout(() => {
+        n.style.opacity = '1';
+        n.style.transform = 'none';
+        if (n.dataset.img === '1') n.style.clipPath = 'inset(0% 0% 0% 0%)';
+      }, delayOf(n));
+    };
+
+    // 2. brojke: count-up
+    const counters = Array.from(document.querySelectorAll('[data-count]'));
+    const runCount = el => {
+      if (el.dataset.counted === '1') return;
+      el.dataset.counted = '1';
+      const raw = el.textContent.trim();
+      const m = raw.match(/(\d[\d\s.]*)/);
+      if (!m) return;
+      const target = parseFloat(m[1].replace(/[\s.]/g, ''));
+      if (!isFinite(target) || target === 0) return;
+      const pre = raw.slice(0, m.index), post = raw.slice(m.index + m[1].length);
+      const suffix = m[1].endsWith('.') ? '.' : '';
+      const t0 = performance.now(), dur = 1100;
+      const step = now => {
+        const k = Math.min(1, (now - t0) / dur);
+        const v = Math.round(target * (1 - Math.pow(1 - k, 3)));
+        el.textContent = pre + v + suffix + post;
+        if (k < 1) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    };
+
+    // mreze: fiksan broj kolona bez praznih celija
+    const layoutGrids = () => {
+      Array.from(document.querySelectorAll('[data-cols]')).forEach(g => {
+        const opcije = g.dataset.cols.split(' ').map(Number);
+        const min = Number(g.dataset.colMin) || 260;
+        const w = g.clientWidth || 0;
+        const n = opcije.find(c => c === 1 || w >= c * min + (c - 1) * 16) || 1;
+        const tpl = 'repeat(' + n + ',minmax(0,1fr))';
+        if (g.style.gridTemplateColumns !== tpl) g.style.gridTemplateColumns = tpl;
+        Array.from(g.children).forEach(ch => {
+          if (ch.dataset.span2 === undefined && ch.style.gridColumn.indexOf('span 2') >= 0) ch.dataset.span2 = '1';
+          if (ch.dataset.span2 === '1') {
+            ch.style.gridColumn = n === 1 ? 'auto' : 'span 2';
+            ch.style.aspectRatio = n === 1 ? '16/9' : 'auto';
+          }
+        });
+      });
+    };
+    // mobilni raspored (inline stilovi, bez media query-ja)
+    const pravila = [
+      ['#vrh > div:nth-child(1)', { gridTemplateColumns: '1fr', gap: '32px', padding: '104px 20px 32px' }],
+      ['#vrh > div:nth-child(2)', { padding: '16px 20px 24px', gap: '16px' }],
+      ['#vrh h1', { whiteSpace: 'normal', fontSize: '40px', lineHeight: '1.05' }],
+      ['#vrh > div:nth-child(1) > div:nth-child(2)', { justifySelf: 'stretch', width: '100%' }],
+      ['[data-nav] nav', { gap: '16px', fontSize: '14px' }],
+      ['footer > div:nth-child(1) > div:nth-child(2)', { gridTemplateColumns: 'repeat(2,minmax(0,1fr))', gap: '32px 24px', padding: '32px 0px' }],
+      ['[data-traka] > span', { width: '180px', height: '120px' }],
+      ['footer > div:nth-child(2) > div:nth-child(2)', { fontSize: '96px', marginBottom: '0em' }],
+      // hero: donja traka sa detaljima
+      ['#vrh > div:nth-child(2)', { flexDirection: 'column', alignItems: 'flex-start', gap: '16px', padding: '16px 20px 24px' }],
+      ['#vrh > div:nth-child(2) > div:nth-child(1)', { flexDirection: 'column', alignItems: 'flex-start', gap: '8px', fontSize: '13px' }],
+      ['#vrh h1 br', { display: 'none' }],
+      ['#vrh > div:nth-child(1) p', { fontSize: '16px' }],
+      // footer
+      ['footer > div:nth-child(1)', { padding: '64px 20px 24px' }],
+      ['footer > div:nth-child(1) > div:nth-child(1)', { gridTemplateColumns: '1fr', gap: '32px', paddingBottom: '32px' }],
+      ['footer > div:nth-child(1) > div:nth-child(2)', { gap: '32px', padding: '32px 0px' }],
+      ['footer > div:nth-child(1) > div:nth-child(3)', { flexDirection: 'column', alignItems: 'flex-start', gap: '12px' }],
+      ['footer > div:nth-child(2)', { marginTop: '-40px' }],
+      ['footer > div:nth-child(2) > div:nth-child(1)', { fontSize: '10.5px', letterSpacing: '0.2em' }]
+    ];
+    // nav: taman im izadjemo iz hero sekcije (jedno mesto, da se ne ponistava)
+    const primeniNav = () => {
+      const nav = document.querySelector('[data-nav]');
+      if (!nav) return;
+      const heroEl = document.querySelector('#vrh');
+      const heroDno = heroEl ? heroEl.offsetTop + heroEl.offsetHeight : 400;
+      const y = window.scrollY || document.documentElement.scrollTop || 0;
+      const past = y > Math.max(0, heroDno - (nav.offsetHeight || 68));
+      if (nav.dataset.taman === (past ? '1' : '0')) return;
+      nav.dataset.taman = past ? '1' : '0';
+      nav.style.transition = 'background .4s ' + ease + ', border-color .4s ' + ease + ', box-shadow .4s ' + ease;
+      nav.style.borderBottom = '1px solid ' + (past ? 'rgba(255,255,255,0.10)' : 'transparent');
+      nav.style.background = past ? '#16130F' : 'transparent';
+      nav.style.backdropFilter = 'none';
+      nav.style.boxShadow = past ? '0 1px 24px rgba(12,10,8,0.18)' : 'none';
+    };
+
+    const primeniMobilni = () => {
+      const m = window.innerWidth <= 760;
+      pravila.forEach(([sel, mob]) => {
+        document.querySelectorAll(sel).forEach(el => {
+          if (el.dataset.desk === undefined) el.dataset.desk = el.getAttribute('style') || '';
+          if (m) Object.assign(el.style, mob);
+          else if (el.getAttribute('style') !== el.dataset.desk) el.setAttribute('style', el.dataset.desk);
+        });
+      });
+      document.querySelectorAll('#vrh p br').forEach(br => { br.style.display = m ? 'none' : 'inline'; });
+      // hero pocinje ispod fiksne trake, ma koliko redova imala
+      const nav = document.querySelector('[data-nav]');
+      if (nav) Object.assign(nav.style, m
+        ? { gridTemplateColumns: '1fr auto', gap: '8px', rowGap: '0px', padding: '8px 16px' }
+        : { gridTemplateColumns: 'auto 1fr auto', gap: '32px', rowGap: '0px', padding: '12px clamp(16px,4vw,56px)' });
+      const heroGrid = document.querySelector('#vrh > div:nth-child(1)');
+      this._navVisina = nav ? nav.offsetHeight : 68;
+      if (m && nav && heroGrid) heroGrid.style.paddingTop = (this._navVisina + 24) + 'px';
+      // mobilni meni umesto reda linkova
+      const linkovi = document.querySelector('[data-nav] nav');
+      const dugmeMeni = document.querySelector('[data-meni]');
+      const panel = document.querySelector('[data-meni-panel]');
+      if (linkovi) linkovi.style.display = m ? 'none' : 'flex';
+      if (dugmeMeni) dugmeMeni.style.display = m ? 'flex' : 'none';
+      if (panel) {
+        const otvoren = m && this.state.meniOtvoren;
+        panel.style.display = otvoren ? 'flex' : 'none';
+        if (m) {
+          const nv = nav ? nav.offsetHeight : 64;
+          Object.assign(panel.style, {
+            position: 'fixed',
+            top: (this.state.meniOtvoren ? nv : 0) + 'px',
+            left: '0px',
+            right: '0px',
+            gridColumn: 'auto',
+            background: '#16130F',
+            borderBottom: '1px solid rgba(255,255,255,0.14)',
+            boxShadow: '0 24px 48px rgba(12,10,8,0.32)',
+            padding: '8px 20px 20px',
+            zIndex: '49'
+          });
+        } else {
+          Object.assign(panel.style, { position: 'static', gridColumn: '1 / -1', background: 'none', boxShadow: 'none', borderBottom: 'none' });
+        }
+      }
+      const cta = document.querySelector('[data-nav] > a[href="#rezervacija"]');
+      if (cta) cta.style.display = m ? 'none' : 'inline-block';
+      // wordmark uz logo: samo na desktopu
+      const wordmark = document.querySelector('[data-nav] > a[href="#vrh"] > span:last-child');
+      if (wordmark) wordmark.style.display = m ? 'none' : 'grid';
+      // u meniju: dugme za rezervaciju na dnu
+      const meniCta = document.querySelector('[data-meni-panel] > a[href="#rezervacija"]');
+      if (meniCta) meniCta.style.display = m ? 'flex' : 'none';
+      // footer: kolone "O klubu" i "Tereni" pune sirine, "Sajt" i "Kontakt" jedna uz drugu
+      if (m) {
+        const kol = document.querySelectorAll('footer > div:nth-child(1) > div:nth-child(2) > div');
+        if (kol[0]) kol[0].style.gridColumn = '1 / -1';
+        if (kol[3]) kol[3].style.gridColumn = '1 / -1';
+      }
+
+      // dugmad u herou i footeru: puna sirina na mobilnom
+      document.querySelectorAll('#vrh a[href="#cene"], #vrh a[href="#rezervacija"], footer a[href="#rezervacija"], footer a[href^="tel:"]').forEach(a => {
+        if (a.dataset.desk === undefined) a.dataset.desk = a.getAttribute('style') || '';
+        if (m) Object.assign(a.style, { flex: '1 1 100%', minWidth: '0px', width: '100%', boxSizing: 'border-box' });
+        else if (a.getAttribute('style') !== a.dataset.desk) a.setAttribute('style', a.dataset.desk);
+      });
+      primeniNav();
+    };
+    primeniMobilni();
+    this._primeniMobilni = primeniMobilni;
+    window.addEventListener('resize', primeniMobilni);
+
+    layoutGrids();
+    this._layoutGrids = layoutGrids;
+    window.addEventListener('resize', layoutGrids);
+
+    const check = () => {
+      primeniMobilni();
+      layoutGrids();
+      const h = window.innerHeight || 800;
+      sviReveal().forEach(n => {
+        pripremi(n);
+        const r = n.getBoundingClientRect();
+        if (r.top < h * 0.88) show(n);
+      });
+      Array.from(document.querySelectorAll('[data-count]')).forEach(n => {
+        const r = n.getBoundingClientRect();
+        if (r.top < h * 0.9) runCount(n);
+      });
+      primeniNav();
+    };
+    window.addEventListener('scroll', primeniNav, { passive: true });
+    // glatko skrolovanje sa inercijom (lerp), samo mis/trackpad
+    const finoSkrolovanje = !window.matchMedia('(prefers-reduced-motion: reduce)').matches
+      && window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    if (finoSkrolovanje) {
+      let cilj = window.scrollY || 0, radi = false;
+      const maxY = () => Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+      const postavi = y => { document.documentElement.scrollTop = y; document.body.scrollTop = y; };
+      const korak = () => {
+        const trenutno = window.scrollY;
+        const razlika = cilj - trenutno;
+        if (Math.abs(razlika) < 0.6) { postavi(cilj); radi = false; return; }
+        postavi(trenutno + razlika * 0.12);
+        requestAnimationFrame(korak);
+      };
+      const naTocak = e => {
+        if (e.ctrlKey) return;
+        e.preventDefault();
+        cilj = Math.min(maxY(), Math.max(0, cilj + e.deltaY));
+        if (!radi) { radi = true; requestAnimationFrame(korak); }
+      };
+      const sinhronizuj = () => { if (!radi) cilj = window.scrollY; };
+      // linkovi u okviru stranice: ista inercijska petlja
+      const naKlik = e => {
+        const a = e.target.closest && e.target.closest('a[href^="#"]');
+        if (!a) return;
+        const id = a.getAttribute('href').slice(1);
+        const cilj_el = id ? document.getElementById(id) : null;
+        if (!cilj_el) return;
+        e.preventDefault();
+        const odmak = (this._navVisina || 68) + 16;
+        cilj = Math.min(maxY(), Math.max(0, window.scrollY + cilj_el.getBoundingClientRect().top - odmak));
+        if (!radi) { radi = true; requestAnimationFrame(korak); }
+      };
+      document.addEventListener('click', naKlik);
+      this._naKlik = naKlik;
+      window.addEventListener('wheel', naTocak, { passive: false });
+      window.addEventListener('resize', sinhronizuj);
+      document.addEventListener('keydown', sinhronizuj);
+      this._naTocak = naTocak;
+      this._sinhronizuj = sinhronizuj;
+    }
+
+    // hero: sadrzaj ulazi po redosledu pri ucitavanju
+    const hero = document.querySelector('#vrh');
+    if (hero) {
+      const uvod = Array.from(hero.querySelectorAll(':scope > div > div, :scope > div > div > div'))
+        .filter(el => el.parentElement && el.parentElement.parentElement === hero).slice(0, 3);
+      const heroDeca = Array.from(hero.children).slice(0, 3);
+      heroDeca.forEach((el, i) => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(16px)';
+        el.style.transition = 'opacity .9s ' + ease + ' ' + (i * 140 + 120) + 'ms, transform .9s ' + ease + ' ' + (i * 140 + 120) + 'ms';
+      });
+      requestAnimationFrame(() => requestAnimationFrame(() => heroDeca.forEach(el => { el.style.opacity = '1'; el.style.transform = 'none'; })));
+      void uvod;
+    }
+
+    // hero slika: lagani parallax
+    const parallax = () => {
+      if (!hero) return;
+      const y = window.scrollY || document.documentElement.scrollTop || 0;
+      if (y > window.innerHeight) return;
+      hero.style.backgroundPosition = 'center calc(50% + ' + (y * 0.12) + 'px)';
+    };
+    window.addEventListener('scroll', parallax, { passive: true });
+    this._parallax = parallax;
+
+    this._check = check;
+    requestAnimationFrame(() => requestAnimationFrame(check));
+    window.addEventListener('scroll', check, { passive: true, capture: true });
+    document.addEventListener('scroll', check, { passive: true, capture: true });
+    window.addEventListener('resize', check);
+    this._tick = setInterval(check, 250);
+    if (!('IntersectionObserver' in window)) {
+      this._safety = setTimeout(() => sviReveal().forEach(n => { n.style.opacity = '1'; n.style.transform = 'none'; n.style.clipPath = 'none'; }), 1200);
+    }
+  }
+
+  componentWillUnmount() {
+    clearInterval(this._tick);
+    clearTimeout(this._safety);
+    if (this._check) {
+      window.removeEventListener('scroll', this._check, { capture: true });
+      document.removeEventListener('scroll', this._check, { capture: true });
+      window.removeEventListener('resize', this._check);
+      if (this._layoutGrids) window.removeEventListener('resize', this._layoutGrids);
+      if (this._parallax) window.removeEventListener('scroll', this._parallax);
+      if (this._naTocak) window.removeEventListener('wheel', this._naTocak);
+      if (this._naKlik) document.removeEventListener('click', this._naKlik);
+      if (this._primeniMobilni) window.removeEventListener('resize', this._primeniMobilni);
+      if (this._sinhronizuj) {
+        window.removeEventListener('resize', this._sinhronizuj);
+        document.removeEventListener('keydown', this._sinhronizuj);
+      }
+    }
+  }
+
+  renderVals() {
+    const vise = this.state.viseSlika;
+    // avgust 2026: 1. je subota -> 5 praznih polja na pocetku
+    const zauzeti = [3, 8, 9, 15, 21, 22, 27];
+    const izabran = 13;
+    const daniKalendara = [];
+    for (let i = 0; i < 5; i++) daniKalendara.push({ broj: '', pozadina: 'transparent', boja: 'transparent', tezina: 400, kursor: 'default' });
+    for (let d = 1; d <= 31; d++) {
+      const jeIzabran = d === izabran, jeZauzet = zauzeti.indexOf(d) >= 0;
+      daniKalendara.push({
+        broj: String(d),
+        pozadina: jeIzabran ? '#C4552A' : jeZauzet ? '#FFFFFF' : '#F1EDE7',
+        boja: jeIzabran ? '#FFFFFF' : jeZauzet ? 'rgba(22,19,15,0.28)' : '#16130F',
+        tezina: jeIzabran ? 700 : 500,
+        kursor: jeZauzet ? 'default' : 'pointer'
+      });
+    }
+    const zauzetiSati = ['09:00', '18:00'];
+    const izabranSat = '19:00';
+    const termini = ['08:00', '09:00', '10:00', '17:00', '18:00', '19:00', '20:00', '21:00'].map(sat => {
+      const jeIzabran = sat === izabranSat, jeZauzet = zauzetiSati.indexOf(sat) >= 0;
+      return {
+        sat,
+        pozadina: jeIzabran ? '#16130F' : jeZauzet ? '#F7F5F2' : '#FFFFFF',
+        boja: jeIzabran ? '#FFFFFF' : jeZauzet ? 'rgba(22,19,15,0.32)' : '#16130F',
+        ivica: jeIzabran ? '#16130F' : 'rgba(22,19,15,0.12)'
+      };
+    });
+    const pitanja = Component.PITANJA.map(([naslov, tekst], i) => ({
+      naslov, tekst,
+      redni: String(i + 1).padStart(2, '0'),
+      znak: this.state.otvoreno === i ? '−' : '+',
+      visina: this.state.otvoreno === i ? '240px' : '0px',
+      klik: () => this.setState(s => ({ otvoreno: s.otvoreno === i ? -1 : i }))
+    }));
+    return {
+      znakMenija: this.state.meniOtvoren ? '✕' : '☰',
+      toggleMeni: () => this.setState(s => ({ meniOtvoren: !s.meniOtvoren }), () => this._primeniMobilni && this._primeniMobilni()),
+      zatvoriMeni: () => this.setState({ meniOtvoren: false }, () => this._primeniMobilni && this._primeniMobilni()),
+      pitanja,
+      daniKalendara,
+      termini,
+      prikaziBlog: this.props.prikaziBlog ?? true,
+      prikaziTurnire: this.props.prikaziTurnire ?? true,
+      viseSlika: vise,
+      mejlPrijava: this.state.mejlPrijava,
+      prijavaPoslata: this.state.prijavaPoslata,
+      prijavaOtvorena: !this.state.prijavaPoslata,
+      promeniMejl: e => this.setState({ mejlPrijava: e.target.value }),
+      posaljiPrijavu: e => { e.preventDefault(); this.setState({ prijavaPoslata: true }); },
+      tekstVise: vise ? 'Prikaži manje' : 'Još slika',
+      strelicaVise: vise ? '↑' : '↓',
+      toggleVise: () => this.setState(s => ({ viseSlika: !s.viseSlika }), () => this._check && this._check())
+    };
+  }
+}

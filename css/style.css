@@ -1,0 +1,17 @@
+/* ============================================================================
+   AS-NS — globalna pravila
+   ----------------------------------------------------------------------------
+   Ovde je samo ono sto ne moze inline: reset, prelazi, stanja linkova,
+   @keyframes. Raspored i boje su inline u index.html (namerno: stranica se
+   iscrtava odmah, bez cekanja na stylesheet), a mobilni raspored postavlja
+   js/main.js kroz listu "pravila".
+   ========================================================================= */
+
+body { margin:0; background:#FFFFFF; }
+  a, button { transition: background .25s cubic-bezier(.22,.68,.28,1), color .25s cubic-bezier(.22,.68,.28,1), border-color .25s cubic-bezier(.22,.68,.28,1), opacity .25s ease, transform .25s cubic-bezier(.22,.68,.28,1); }
+  a:active, button:active { transform: scale(0.98); }
+  [data-img] { transition: transform .7s cubic-bezier(.22,.68,.28,1), clip-path 1.05s cubic-bezier(.22,.68,.28,1); }
+  a { color:#C4552A; text-decoration:none; }
+  a:hover { color:#9C3F1C; }
+  input::placeholder { color: rgba(255,255,255,0.7); }
+  @keyframes traka { from { transform: translate3d(-50%,0,0); } to { transform: translate3d(0,0,0); } }
