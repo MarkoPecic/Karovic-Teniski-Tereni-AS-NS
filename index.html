@@ -121,11 +121,10 @@
   ============================================================================
   STRUKTURA PROJEKTA
   ============================================================================
-    index.html        ova stranica (markup svih sekcija, sa inline stilovima)
+    index.html        ova stranica: markup sekcija + logika u skripti na dnu
     404.html          stranica za nepostojece adrese
     css/style.css     globalna pravila (reset, prelazi, keyframes)
-    js/main.js        logika sajta (animacije, mobilni raspored, kalendar)
-    js/support.js     runtime koji vezuje js/main.js za markup
+    js/support.js     runtime koji vezuje skriptu na dnu za markup
     slike/            fotografije (.webp za velike, .png za male kvadratne)
     robots.txt        dozvole za pretrazivace i AI botove
     sitemap.xml       mapa sajta
@@ -158,7 +157,7 @@
     #rezervacija          koraci + prikaz kalendara (mockup, ne pravi booking)
     <footer>              kontakt kolone, brojevi terena, veliki AS-NS znak
 
-  Konvencije koje logika ocekuje (vidi <script data-dc-script> na dnu fajla):
+  Konvencije koje logika ocekuje (vidi skriptu na dnu fajla):
     data-reveal-group   omotac sekcije; stagger se racuna unutar grupe
     data-reveal         element koji ulazi u kadar (fade + rise)
     data-img            reveal varijanta za slike (clip-path otkrivanje)
@@ -195,7 +194,7 @@
         <a href="#turniri" style="color:inherit" style-hover="color:#FFFFFF">Turniri</a>
         <a href="#lokacija" style="color:inherit" style-hover="color:#FFFFFF">Kontakt</a>
       </nav>
-      <a href="#rezervacija" style="justify-self:end;background:#FFFFFF;color:#16130F;font-weight:600;font-size:14.5px;padding:12px 20px;border-radius:999px" style-hover="background:#F1EDE7">Rezerviši ↗</a>
+      <a href="#rezervacija" style="justify-self:end;background:#FFFFFF;color:#16130F;font-weight:600;font-size:14.5px;padding:12px 20px;border-radius:999px" style-hover="background:#16130F;color:#FFFFFF">Rezerviši ↗</a>
       <button type="button" data-meni="1" onClick="{{ toggleMeni }}" aria-label="Meni" style="display:none;align-items:center;justify-content:center;width:48px;height:48px;border-radius:999px;border:1px solid rgba(255,255,255,0.28);background:rgba(12,10,8,0.32);color:#FFFFFF;font-size:20px;cursor:pointer">{{ znakMenija }}</button>
       <div data-meni-panel="1" style="display:none;grid-column:span 2;flex-direction:column;gap:4px;padding:8px 0px 12px">
         <a href="#o-nama" onClick="{{ zatvoriMeni }}" style="padding:14px 4px;font-size:17px;font-weight:500;color:#FFFFFF;border-bottom:1px solid rgba(255,255,255,0.14)">O nama</a>
@@ -220,15 +219,15 @@
         <h1 style="font-family:'Manrope',system-ui,sans-serif;font-weight:800;font-size:clamp(40px,5.4vw,80px);line-height:1.0;letter-spacing:-0.025em;margin:0px 0px 24px;text-wrap:nowrap;white-space:nowrap">Ponesi reket.<br>Ostalo je spremno.</h1>
         <p style="font-size:clamp(16px,1.5vw,19px);line-height:1.6;color:rgba(255,255,255,0.88);max-width:47ch;margin:0px 0px 32px">Četiri terena šljake i jedan zatvoren, dva kilometra od centra<br>Vrnjačke Banje. Rezerviši termin u par klikova.</p>
         <div style="display:flex;flex-wrap:wrap;gap:16px;margin-bottom:40px">
-          <a href="#cene" style="display:inline-flex;align-items:center;justify-content:center;min-width:176px;background:#16130F;color:#FFFFFF;font-weight:600;font-size:16px;padding:14px 28px;border-radius:999px" style-hover="background:#000000">Cenovnik</a>
-          <a href="#rezervacija" style="display:inline-flex;align-items:center;justify-content:center;min-width:176px;background:#FFFFFF;color:#16130F;font-weight:600;font-size:16px;padding:14px 28px;border-radius:999px" style-hover="background:#F1EDE7">Rezerviši termin</a>
+          <a href="#cene" style="display:inline-flex;align-items:center;justify-content:center;min-width:176px;background:#16130F;color:#FFFFFF;font-weight:600;font-size:16px;padding:14px 28px;border-radius:999px" style-hover="background:#C4552A">Cenovnik</a>
+          <a href="#rezervacija" style="display:inline-flex;align-items:center;justify-content:center;min-width:176px;background:#FFFFFF;color:#16130F;font-weight:600;font-size:16px;padding:14px 28px;border-radius:999px" style-hover="background:#16130F;color:#FFFFFF">Rezerviši termin</a>
         </div>
-        <a href="#galerija" style="display:inline-flex;align-items:center;gap:16px;background:rgba(22,19,15,0.42);border:1px solid rgba(255,255,255,0.20);backdrop-filter:blur(14px);border-radius:999px;padding:12px 24px 12px 12px;color:#FFFFFF" style-hover="background:rgba(22,19,15,0.56)">
-          <span style="display:flex;gap:8px">
-            <span style="width:52px;height:52px;border-radius:12px;background-image:url('slike/nocno.png');background-size:cover;background-position:center"></span>
-            <span style="width:52px;height:52px;border-radius:12px;background-image:url('slike/forhend.png');background-size:cover;background-position:center"></span>
-            <span style="width:52px;height:52px;border-radius:12px;background-image:url('slike/staza-drvoredi.png');background-size:cover;background-position:center"></span>
-            <span style="width:52px;height:52px;border-radius:12px;background-image:url('slike/publika-klupe.png');background-size:cover;background-position:center"></span>
+        <a href="#galerija" data-bez-hover="1" style="display:inline-flex;align-items:center;gap:16px;background:rgba(22,19,15,0.42);border:1px solid rgba(255,255,255,0.20);backdrop-filter:blur(14px);border-radius:999px;padding:12px 24px 12px 12px;color:#FFFFFF">
+          <span style="display:flex">
+            <span style="width:52px;height:52px;border-radius:50%;border:2px solid rgba(22,19,15,0.45);background-image:url('slike/nocno.png');background-size:cover;background-position:center"></span>
+            <span style="width:52px;height:52px;margin-left:-16px;border-radius:50%;border:2px solid rgba(22,19,15,0.45);background-image:url('slike/forhend.png');background-size:cover;background-position:center"></span>
+            <span style="width:52px;height:52px;margin-left:-16px;border-radius:50%;border:2px solid rgba(22,19,15,0.45);background-image:url('slike/staza-drvoredi.png');background-size:cover;background-position:center"></span>
+            <span style="width:52px;height:52px;margin-left:-16px;border-radius:50%;border:2px solid rgba(22,19,15,0.45);background-image:url('slike/publika-klupe.png');background-size:cover;background-position:center"></span>
           </span>
           <span style="display:grid;gap:4px;font-size:14px;line-height:1.25"><span style="font-weight:700">30+ fotografija</span><span style="color:rgba(255,255,255,0.8)">pogledaj galeriju</span></span>
         </a>
@@ -270,9 +269,9 @@
         <span>Telefon · 063 681 739</span>
       </div>
       <div style="display:flex;flex-wrap:wrap;align-items:center;gap:12px">
-        <a href="https://www.instagram.com/explore/locations/1760614960817436/teniski-klub-as-ns-vrnjacka-banja/" style="border:1px solid rgba(255,255,255,0.28);border-radius:999px;padding:8px 16px;font-size:13.5px;font-weight:500;color:#FFFFFF" style-hover="background:rgba(255,255,255,0.14)">Instagram ↗</a>
-        <a href="https://www.facebook.com/tennisvb/?locale=sr_RS" style="border:1px solid rgba(255,255,255,0.28);border-radius:999px;padding:8px 16px;font-size:13.5px;font-weight:500;color:#FFFFFF" style-hover="background:rgba(255,255,255,0.14)">Facebook ↗</a>
-        <a href="#o-nama" style="display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.14);border:1px solid rgba(255,255,255,0.28);border-radius:999px;padding:8px 16px;font-size:13.5px;font-weight:500;color:#FFFFFF" style-hover="background:rgba(255,255,255,0.24)">Skroluj <span>↓</span></a>
+        <a href="https://www.instagram.com/explore/locations/1760614960817436/teniski-klub-as-ns-vrnjacka-banja/" style="border:1px solid rgba(255,255,255,0.28);border-radius:999px;padding:8px 16px;font-size:13.5px;font-weight:500;color:#FFFFFF" style-hover="background:#FFFFFF;color:#16130F;border-color:#FFFFFF">Instagram ↗</a>
+        <a href="https://www.facebook.com/tennisvb/?locale=sr_RS" style="border:1px solid rgba(255,255,255,0.28);border-radius:999px;padding:8px 16px;font-size:13.5px;font-weight:500;color:#FFFFFF" style-hover="background:#FFFFFF;color:#16130F;border-color:#FFFFFF">Facebook ↗</a>
+        <a href="#o-nama" style="display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.14);border:1px solid rgba(255,255,255,0.28);border-radius:999px;padding:8px 16px;font-size:13.5px;font-weight:500;color:#FFFFFF" style-hover="background:#FFFFFF;color:#16130F;border-color:#FFFFFF">Skroluj <span>↓</span></a>
       </div>
     </div>
   </section>
@@ -352,10 +351,10 @@
       </div>
 
       <div data-cols="4 2 1" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:16px;margin-top:16px">
-        <div style="border:1px solid rgba(22,19,15,0.12);border-radius:20px;padding:24px;display:grid;gap:8px;align-content:start" style-hover="border-color:#C4552A"><h3 style="font-family:'Manrope',system-ui,sans-serif;font-weight:700;font-size:18px;letter-spacing:-0.02em;margin:0px">Mali fudbal</h3><p style="margin:0px;font-size:15px;line-height:1.65;color:#413C34">Otvoreni teren sa veštačkom travom. Zimi se igra pod krovom.</p><div style="font-size:13.5px;color:#6E675C">Cena · [DOPUNITI]</div></div>
-        <div style="border:1px solid rgba(22,19,15,0.12);border-radius:20px;padding:24px;display:grid;gap:8px;align-content:start" style-hover="border-color:#C4552A"><h3 style="font-family:'Manrope',system-ui,sans-serif;font-weight:700;font-size:18px;letter-spacing:-0.02em;margin:0px">Škola tenisa</h3><p style="margin:0px;font-size:15px;line-height:1.65;color:#413C34">[DOPUNITI: da li postoji škola tenisa i u kom obliku]</p><div style="font-size:13.5px;color:#6E675C">Uzrasti i treneri · [DOPUNITI]</div></div>
-        <div style="border:1px solid rgba(22,19,15,0.12);border-radius:20px;padding:24px;display:grid;gap:8px;align-content:start" style-hover="border-color:#C4552A"><h3 style="font-family:'Manrope',system-ui,sans-serif;font-weight:700;font-size:18px;letter-spacing:-0.02em;margin:0px">Turniri</h3><p style="margin:0px;font-size:15px;line-height:1.65;color:#413C34">ITF turnir i klupska takmičenja kroz celu sezonu.</p><div style="font-size:13.5px;color:#6E675C">Prijave · [DOPUNITI]</div></div>
-        <div style="border:1px solid rgba(22,19,15,0.12);border-radius:20px;padding:24px;display:grid;gap:8px;align-content:start" style-hover="border-color:#C4552A"><h3 style="font-family:'Manrope',system-ui,sans-serif;font-weight:700;font-size:18px;letter-spacing:-0.02em;margin:0px">Team building i rođendani</h3><p style="margin:0px;font-size:15px;line-height:1.65;color:#413C34">Ceo kompleks se zakupljuje za firme i dečje proslave.</p><div style="font-size:13.5px;color:#6E675C">Paketi · [DOPUNITI]</div></div>
+        <div style="border:1px solid rgba(22,19,15,0.12);border-radius:20px;padding:24px;display:grid;gap:8px;align-content:start" data-bez-hover="1"><h3 style="font-family:'Manrope',system-ui,sans-serif;font-weight:700;font-size:18px;letter-spacing:-0.02em;margin:0px">Mali fudbal</h3><p style="margin:0px;font-size:15px;line-height:1.65;color:#413C34">Otvoreni teren sa veštačkom travom. Zimi se igra pod krovom.</p><div style="font-size:13.5px;color:#6E675C">Cena · [DOPUNITI]</div></div>
+        <div style="border:1px solid rgba(22,19,15,0.12);border-radius:20px;padding:24px;display:grid;gap:8px;align-content:start" data-bez-hover="1"><h3 style="font-family:'Manrope',system-ui,sans-serif;font-weight:700;font-size:18px;letter-spacing:-0.02em;margin:0px">Škola tenisa</h3><p style="margin:0px;font-size:15px;line-height:1.65;color:#413C34">[DOPUNITI: da li postoji škola tenisa i u kom obliku]</p><div style="font-size:13.5px;color:#6E675C">Uzrasti i treneri · [DOPUNITI]</div></div>
+        <div style="border:1px solid rgba(22,19,15,0.12);border-radius:20px;padding:24px;display:grid;gap:8px;align-content:start" data-bez-hover="1"><h3 style="font-family:'Manrope',system-ui,sans-serif;font-weight:700;font-size:18px;letter-spacing:-0.02em;margin:0px">Turniri</h3><p style="margin:0px;font-size:15px;line-height:1.65;color:#413C34">ITF turnir i klupska takmičenja kroz celu sezonu.</p><div style="font-size:13.5px;color:#6E675C">Prijave · [DOPUNITI]</div></div>
+        <div style="border:1px solid rgba(22,19,15,0.12);border-radius:20px;padding:24px;display:grid;gap:8px;align-content:start" data-bez-hover="1"><h3 style="font-family:'Manrope',system-ui,sans-serif;font-weight:700;font-size:18px;letter-spacing:-0.02em;margin:0px">Team building i rođendani</h3><p style="margin:0px;font-size:15px;line-height:1.65;color:#413C34">Ceo kompleks se zakupljuje za firme i dečje proslave.</p><div style="font-size:13.5px;color:#6E675C">Paketi · [DOPUNITI]</div></div>
       </div>
     </section>
   </main>
@@ -397,7 +396,7 @@
           <div style="display:flex;justify-content:space-between;gap:12px;padding-bottom:8px;border-bottom:1px solid rgba(255,255,255,0.24)"><span style="color:rgba(255,255,255,0.82)">Terena u konkurenciji</span><span style="font-weight:700">4</span></div>
           <div style="display:flex;justify-content:space-between;gap:12px"><span style="color:rgba(255,255,255,0.82)">Ulaz za gledaoce</span><span style="font-weight:700">slobodan</span></div>
         </div>
-        <a href="#lokacija" style="justify-self:start;background:#FFFFFF;color:#16130F;font-weight:600;font-size:15px;padding:16px 24px;border-radius:999px" style-hover="background:#F1EDE7">Prijave i žreb ↗</a>
+        <a href="#lokacija" style="justify-self:start;background:#FFFFFF;color:#16130F;font-weight:600;font-size:15px;padding:16px 24px;border-radius:999px" style-hover="background:#16130F;color:#FFFFFF">Prijave i žreb ↗</a>
       </div>
       <div>
         <div style="display:inline-block;border:1px solid rgba(22,19,15,0.14);border-radius:999px;padding:8px 16px;font-size:13px;font-weight:500;color:#6E675C;margin-bottom:24px">Turniri</div>
@@ -441,7 +440,7 @@
       </div>
       </sc-if>
       <div style="display:flex;justify-content:center;margin-top:32px">
-        <button type="button" onClick="{{ toggleVise }}" style="display:inline-flex;align-items:center;gap:12px;background:#FFFFFF;border:1px solid rgba(22,19,15,0.16);border-radius:999px;padding:14px 24px;font-family:inherit;font-size:15px;font-weight:600;color:#16130F;cursor:pointer" style-hover="border-color:#C4552A">
+        <button type="button" onClick="{{ toggleVise }}" style="display:inline-flex;align-items:center;gap:12px;background:#FFFFFF;border:1px solid rgba(22,19,15,0.16);border-radius:999px;padding:14px 24px;font-family:inherit;font-size:15px;font-weight:600;color:#16130F;cursor:pointer" style-hover="background:#16130F;color:#FFFFFF;border-color:#16130F">
           <span>{{ tekstVise }}</span>
           <span style="display:flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;background:#16130F;color:#FFFFFF;font-size:13px">{{ strelicaVise }}</span>
         </button>
@@ -489,8 +488,8 @@
         <h2 data-reveal="1" style="font-family:'Manrope',system-ui,sans-serif;font-weight:800;font-size:clamp(30px,4.2vw,52px);line-height:1.05;letter-spacing:-0.025em;margin:0px 0px 12px;max-width:16ch">Najbolji termini odu do podneva.</h2>
         <p style="font-size:16.5px;line-height:1.6;color:rgba(255,255,255,0.85);max-width:42ch;margin:0px 0px 24px">Jutarnji prvi, večernji odmah za njima. Sada su još slobodni.</p>
         <div style="display:flex;flex-wrap:wrap;gap:12px">
-          <a href="#rezervacija" style="display:inline-flex;align-items:center;justify-content:center;min-width:176px;background:#FFFFFF;color:#16130F;font-weight:600;font-size:16px;padding:14px 28px;border-radius:999px" style-hover="background:#F1EDE7">Rezerviši termin</a>
-          <a href="tel:+381063681739" style="display:inline-flex;align-items:center;justify-content:center;min-width:176px;border:1px solid rgba(255,255,255,0.32);color:#FFFFFF;font-weight:600;font-size:16px;padding:14px 28px;border-radius:999px" style-hover="background:rgba(255,255,255,0.14)">063 681 739</a>
+          <a href="#rezervacija" style="display:inline-flex;align-items:center;justify-content:center;min-width:176px;background:#FFFFFF;color:#16130F;font-weight:600;font-size:16px;padding:14px 28px;border-radius:999px" style-hover="background:#16130F;color:#FFFFFF">Rezerviši termin</a>
+          <a href="tel:+381063681739" style="display:inline-flex;align-items:center;justify-content:center;min-width:176px;border:1px solid rgba(255,255,255,0.32);color:#FFFFFF;font-weight:600;font-size:16px;padding:14px 28px;border-radius:999px" style-hover="background:#FFFFFF;color:#16130F;border-color:#FFFFFF">063 681 739</a>
         </div>
       </div>
       <div>
@@ -504,7 +503,7 @@
         <sc-if value="{{ prijavaOtvorena }}" hint-placeholder-val="{{ true }}">
         <form onSubmit="{{ posaljiPrijavu }}" style="display:flex;align-items:center;gap:16px;border-bottom:1px solid rgba(255,255,255,0.32);padding-bottom:12px">
           <input type="email" required="{{ true }}" value="{{ mejlPrijava }}" onChange="{{ promeniMejl }}" placeholder="tvoj@mejl.rs" style="flex:1 1 auto;min-width:0px;background:transparent;border:none;font-family:inherit;font-size:17px;color:#FFFFFF;outline:none">
-          <button type="submit" style="flex:none;background:#FFFFFF;color:#16130F;border:none;border-radius:999px;padding:12px 24px;font-family:inherit;font-size:15px;font-weight:600;cursor:pointer;white-space:nowrap" style-hover="background:#F1EDE7">Prijavi me</button>
+          <button type="submit" style="flex:none;background:#FFFFFF;color:#16130F;border:none;border-radius:999px;padding:12px 24px;font-family:inherit;font-size:15px;font-weight:600;cursor:pointer;white-space:nowrap" style-hover="background:#16130F;color:#FFFFFF">Prijavi me</button>
         </form>
         </sc-if>
         <p style="margin:16px 0px 0px;font-size:14.5px;line-height:1.6;color:rgba(255,255,255,0.72);max-width:44ch">Poruka stiže pred svaki turnir i kad se otvori nova sezona. Bez reklama, odjava jednim klikom.</p>
@@ -519,15 +518,15 @@
       <div style="display:inline-block;border:1px solid rgba(22,19,15,0.14);border-radius:999px;padding:8px 16px;font-size:13px;font-weight:500;color:#6E675C;margin-bottom:20px">Sa terena</div>
       <h2 data-reveal="1" style="font-family:'Manrope',system-ui,sans-serif;font-weight:800;font-size:clamp(26px,3vw,38px);letter-spacing:-0.022em;margin:0px 0px 32px">Novosti iz kluba</h2>
       <div data-cols="3 1" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:16px">
-        <a href="#blog" style="display:block;color:inherit;border:1px solid rgba(22,19,15,0.12);border-radius:24px;overflow:hidden" style-hover="border-color:#C4552A">
+        <a href="#blog" data-bez-hover="1" style="display:block;color:inherit;border:1px solid rgba(22,19,15,0.12);border-radius:24px;overflow:hidden">
           <div style="aspect-ratio:16/10;background-image:url('slike/finale.png');background-size:cover;background-position:center"></div>
           <div style="padding:24px"><div style="font-size:12.5px;font-weight:600;color:#C4552A;margin-bottom:8px">[DOPUNITI: datum]</div><h3 style="font-family:'Manrope',system-ui,sans-serif;font-weight:700;font-size:19.5px;letter-spacing:-0.02em;margin:0px 0px 8px">Vrnjačka Banja Open: žreb, satnica i ko brani titulu</h3><p style="margin:0px;font-size:14.5px;color:#6E675C;line-height:1.6">Nedelja dana ITF tenisa na Karoviću, ulaz slobodan.</p></div>
         </a>
-        <a href="#blog" style="display:block;color:inherit;border:1px solid rgba(22,19,15,0.12);border-radius:24px;overflow:hidden" style-hover="border-color:#C4552A">
+        <a href="#blog" data-bez-hover="1" style="display:block;color:inherit;border:1px solid rgba(22,19,15,0.12);border-radius:24px;overflow:hidden">
           <div style="aspect-ratio:16/10;background-image:url('slike/mreza-sponzori.png');background-size:cover;background-position:center"></div>
           <div style="padding:24px"><div style="font-size:12.5px;font-weight:600;color:#C4552A;margin-bottom:8px">[DOPUNITI: datum]</div><h3 style="font-family:'Manrope',system-ui,sans-serif;font-weight:700;font-size:19.5px;letter-spacing:-0.02em;margin:0px 0px 8px">Kako se šljaka otvara za sezonu: valjak, voda, linije</h3><p style="margin:0px;font-size:14.5px;color:#6E675C;line-height:1.6">Tri nedelje posla pre prve lopte u martu.</p></div>
         </a>
-        <a href="#blog" style="display:block;color:inherit;border:1px solid rgba(22,19,15,0.12);border-radius:24px;overflow:hidden" style-hover="border-color:#C4552A">
+        <a href="#blog" data-bez-hover="1" style="display:block;color:inherit;border:1px solid rgba(22,19,15,0.12);border-radius:24px;overflow:hidden">
           <div style="aspect-ratio:16/10;background-image:url('slike/forhend.png');background-size:cover;background-position:center"></div>
           <div style="padding:24px"><div style="font-size:12.5px;font-weight:600;color:#C4552A;margin-bottom:8px">[DOPUNITI: datum]</div><h3 style="font-family:'Manrope',system-ui,sans-serif;font-weight:700;font-size:19.5px;letter-spacing:-0.02em;margin:0px 0px 8px">Klizanje po šljaci: gde staje noga, a gde reket</h3><p style="margin:0px;font-size:14.5px;color:#6E675C;line-height:1.6">Vodič za igrače koji prelaze sa betona na crveno.</p></div>
         </a>
@@ -539,18 +538,20 @@
   <section data-reveal-group="1" id="faq" data-screen-label="Pitanja" style="padding:96px 0px">
       <div style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:40px">
         <h2 data-reveal="1" style="font-family:'Manrope',system-ui,sans-serif;font-weight:800;font-size:clamp(28px,3.8vw,48px);line-height:1.05;letter-spacing:-0.022em;margin:0px;max-width:16ch">Sve što se obično pita</h2>
-        <a href="tel:+381063681739" style="display:inline-flex;align-items:center;gap:12px;border:1px solid rgba(22,19,15,0.16);border-radius:999px;padding:12px 20px;font-size:15px;font-weight:600;color:#16130F" style-hover="border-color:#C4552A">Nema odgovora? 063 681 739</a>
+        <a href="tel:+381063681739" style="display:inline-flex;align-items:center;gap:12px;border:1px solid rgba(22,19,15,0.16);border-radius:999px;padding:12px 20px;font-size:15px;font-weight:600;color:#16130F" style-hover="background:#16130F;color:#FFFFFF;border-color:#16130F">Nema odgovora? 063 681 739</a>
       </div>
       <div style="display:grid;gap:0px;border-top:1px solid rgba(22,19,15,0.12)">
         <sc-for list="{{ pitanja }}" as="p" hint-placeholder-count="8">
           <div style="border-bottom:1px solid rgba(22,19,15,0.12)">
-            <button type="button" onClick="{{ p.klik }}" style="display:flex;align-items:center;gap:24px;width:100%;background:none;border:none;padding:24px 0px;font-family:inherit;text-align:left;cursor:pointer" style-hover="opacity:0.7">
+            <button type="button" onClick="{{ p.klik }}" style="display:flex;align-items:center;gap:24px;width:100%;background:none;border:none;padding:24px 0px;font-family:inherit;text-align:left;cursor:pointer">
               <span style="flex:none;font-size:13px;font-weight:600;color:#C4552A;width:28px">{{ p.redni }}</span>
               <span style="flex:1 1 auto;font-family:'Manrope',system-ui,sans-serif;font-size:clamp(17px,1.6vw,21px);font-weight:700;letter-spacing:-0.015em;color:#16130F">{{ p.naslov }}</span>
               <span style="flex:none;display:flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:50%;border:1px solid rgba(22,19,15,0.16);font-size:15px;color:#16130F">{{ p.znak }}</span>
             </button>
-            <div style="overflow:hidden;max-height:{{ p.visina }};transition:max-height .45s cubic-bezier(.22,.68,.28,1)">
-              <p style="margin:0px 0px 24px;padding-left:52px;font-size:16.5px;line-height:1.7;color:#4F4A42;max-width:62ch">{{ p.tekst }}</p>
+            <div style="display:grid;grid-template-rows:{{ p.redovi }};transition:grid-template-rows .72s cubic-bezier(.32,.72,.22,1)">
+              <div style="overflow:hidden;min-height:0px">
+                <p style="margin:0px 0px 24px;padding-left:52px;font-size:16.5px;line-height:1.7;color:#4F4A42;max-width:62ch;opacity:{{ p.prozirnost }};transform:translateY({{ p.pomeraj }});transition:opacity .55s cubic-bezier(.32,.72,.22,1) .1s, transform .68s cubic-bezier(.32,.72,.22,1)">{{ p.tekst }}</p>
+              </div>
             </div>
           </div>
         </sc-for>
@@ -568,7 +569,7 @@
       </div>
       <div style="position:relative;min-height:280px;border-radius:24px;overflow:hidden;background:#F1EDE7">
         <iframe title="Mapa — AS-NS Karović" src="https://www.google.com/maps?q=43.6264013,20.865555&z=16&hl=sr&output=embed" style="position:absolute;inset:0px;width:100%;height:100%;border:0px" loading="lazy" referrerPolicy="no-referrer-when-downgrade" allowFullScreen="{{ true }}"></iframe>
-        <a href="https://www.google.com/maps/place/AS-NS+Karovic/@43.6264013,20.865555,17z" target="_blank" rel="noreferrer" style="position:absolute;left:16px;bottom:16px;background:#FFFFFF;border-radius:999px;padding:12px 20px;font-size:13.5px;font-weight:600;color:#16130F;box-shadow:0 4px 20px rgba(12,10,8,0.16)" style-hover="background:#F1EDE7">Otvori u Google mapama ↗</a>
+        <a href="https://www.google.com/maps/place/AS-NS+Karovic/@43.6264013,20.865555,17z" target="_blank" rel="noreferrer" style="position:absolute;left:16px;bottom:16px;background:#FFFFFF;border-radius:999px;padding:12px 20px;font-size:13.5px;font-weight:600;color:#16130F;box-shadow:0 4px 20px rgba(12,10,8,0.16)" style-hover="background:#16130F;color:#FFFFFF">Otvori u Google mapama ↗</a>
       </div>
     </section>
 
@@ -601,7 +602,7 @@
 
         <div style="display:flex;flex-wrap:wrap;gap:12px">
           <a href="tel:+381063681739" style="display:inline-flex;align-items:center;justify-content:center;min-width:176px;background:#16130F;color:#FFFFFF;font-weight:600;font-size:15px;padding:14px 28px;border-radius:999px" style-hover="background:#C4552A">063 681 739</a>
-          <a href="mailto:skarovic@mts.rs" style="display:inline-flex;align-items:center;justify-content:center;min-width:176px;border:1px solid rgba(22,19,15,0.16);color:#16130F;font-weight:600;font-size:15px;padding:14px 28px;border-radius:999px" style-hover="border-color:#C4552A">skarovic@mts.rs</a>
+          <a href="mailto:skarovic@mts.rs" style="display:inline-flex;align-items:center;justify-content:center;min-width:176px;border:1px solid rgba(22,19,15,0.16);color:#16130F;font-weight:600;font-size:15px;padding:14px 28px;border-radius:999px" style-hover="background:#16130F;color:#FFFFFF;border-color:#16130F">skarovic@mts.rs</a>
         </div>
       </div>
       <div style="border-radius:24px;border:1px solid rgba(22,19,15,0.12);background:#FFFFFF;overflow:hidden;box-shadow:0 8px 40px rgba(12,10,8,0.06)">
@@ -655,7 +656,7 @@
           <div style="font-family:'Manrope',system-ui,sans-serif;font-weight:800;font-size:clamp(32px,4.4vw,56px);line-height:1.05;letter-spacing:-0.025em">Vidimo se<br>na šljaci.</div>
         </div>
         <div style="display:flex;flex-wrap:wrap;gap:16px;justify-content:flex-start">
-          <a href="tel:+381063681739" style="display:inline-flex;align-items:center;justify-content:center;min-width:176px;background:#FFFFFF;color:#16130F;font-weight:600;font-size:16px;padding:14px 28px;border-radius:999px" style-hover="background:#F1EDE7">063 681 739</a>
+          <a href="tel:+381063681739" style="display:inline-flex;align-items:center;justify-content:center;min-width:176px;background:#FFFFFF;color:#16130F;font-weight:600;font-size:16px;padding:14px 28px;border-radius:999px" style-hover="background:#16130F;color:#FFFFFF">063 681 739</a>
           <a href="#rezervacija" style="display:inline-flex;align-items:center;justify-content:center;min-width:176px;background:#C4552A;color:#FFFFFF;font-weight:600;font-size:16px;padding:14px 28px;border-radius:999px" style-hover="background:#9C3F1C">Rezerviši termin</a>
         </div>
       </div>
@@ -668,8 +669,8 @@
           </div>
           <p style="margin:0px 0px 20px;font-size:14.5px;color:rgba(255,255,255,0.82);line-height:1.65;max-width:30ch">Sportski centar Karović, Vrnjačka Banja. Domaćin Vrnjačka Banja Opena od 2013.</p>
           <div style="display:flex;flex-wrap:wrap;gap:8px">
-            <a href="https://www.facebook.com/tennisvb/?locale=sr_RS" target="_blank" rel="noreferrer" style="border:1px solid rgba(255,255,255,0.24);border-radius:999px;padding:8px 16px;font-size:13.5px;font-weight:500;color:#FFFFFF" style-hover="background:rgba(255,255,255,0.14)">Facebook ↗</a>
-            <a href="https://www.instagram.com/explore/locations/1760614960817436/teniski-klub-as-ns-vrnjacka-banja/" target="_blank" rel="noreferrer" style="border:1px solid rgba(255,255,255,0.24);border-radius:999px;padding:8px 16px;font-size:13.5px;font-weight:500;color:#FFFFFF" style-hover="background:rgba(255,255,255,0.14)">Instagram ↗</a>
+            <a href="https://www.facebook.com/tennisvb/?locale=sr_RS" target="_blank" rel="noreferrer" style="border:1px solid rgba(255,255,255,0.24);border-radius:999px;padding:8px 16px;font-size:13.5px;font-weight:500;color:#FFFFFF" style-hover="background:#FFFFFF;color:#16130F;border-color:#FFFFFF">Facebook ↗</a>
+            <a href="https://www.instagram.com/explore/locations/1760614960817436/teniski-klub-as-ns-vrnjacka-banja/" target="_blank" rel="noreferrer" style="border:1px solid rgba(255,255,255,0.24);border-radius:999px;padding:8px 16px;font-size:13.5px;font-weight:500;color:#FFFFFF" style-hover="background:#FFFFFF;color:#16130F;border-color:#FFFFFF">Instagram ↗</a>
           </div>
         </div>
 
@@ -714,6 +715,435 @@
 </x-dc>
 
 <script src="js/support.js"></script>
-<script data-dc-script data-props="{&quot;prikaziBlog&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Sekcije&quot;},&quot;prikaziTurnire&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Sekcije&quot;},&quot;animacije&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Ponašanje&quot;}}" src="js/main.js"></script>
+
+<!--
+  Logika sajta. Mora da stoji ugradjena u ovaj dokument: runtime u
+  js/support.js cita sadrzaj skripte ispod iz same stranice, pa izdvajanje u
+  spoljni fajl ne radi (stranica ostaje bez animacija, mobilnog rasporeda i
+  interakcija). Opis stanja, propsa i toga sta radi componentDidMount je u
+  komentaru na pocetku klase.
+-->
+<script type="text/x-dc" data-dc-script data-props="{&quot;prikaziBlog&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Sekcije&quot;},&quot;prikaziTurnire&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Sekcije&quot;},&quot;animacije&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Ponašanje&quot;}}">
+/*
+  ============================================================================
+  LOGIKA SAJTA
+  ============================================================================
+  Sve se svodi na cetiri grupe:
+
+  1. STANJE (state)
+     viseSlika       da li je otvoren dopunski red galerije
+     mejlPrijava     tekst u polju za prijavu na obavestenja o turnirima
+     prijavaPoslata  posle slanja se forma zamenjuje potvrdom
+     otvoreno        indeks otvorenog pitanja u FAQ akordeonu (-1 = zatvoreno)
+     meniOtvoren     mobilni meni
+
+  2. PROPS (podesavanja u Tweaks panelu)
+     prikaziBlog     ukljucuje sekciju #blog
+     prikaziTurnire  ukljucuje sekciju #turniri
+     animacije       false = bez animacija i bez JS rasporeda (cist prikaz)
+
+  3. componentDidMount — sve sto trazi DOM, po redu:
+     primeniNav        boja fiksne trake (tamna van heroa, providna u herou)
+     primeniMobilni    mobilni raspored kroz listu "pravila" (bez media query-ja)
+     layoutGrids       broj kolona po data-cols, bez praznih celija
+     pripremi/show     reveal animacije (fade + rise, clip-path za slike)
+     runCount          odbrojavanje brojeva sa data-count
+     finoSkrolovanje   inercija skrola (samo mis/trackpad, respektuje
+                       prefers-reduced-motion)
+     parallax          lagano pomeranje hero slike
+     check             jedan prolaz koji sve gore poziva; vezan na scroll,
+                       resize i interval od 250 ms
+
+  4. renderVals — vrednosti koje sablon cita: dani kalendara, termini,
+     pitanja, tekstovi dugmadi i handleri.
+
+  Sve slusace koje mount postavi, componentWillUnmount uklanja.
+  ============================================================================
+*/
+class Component extends DCLogic {
+  state = { viseSlika: false, mejlPrijava: '', prijavaPoslata: false, otvoreno: 0, meniOtvoren: false };
+
+  static PITANJA = [
+    ['Kako se rezerviše termin?', 'Preko kalendara ispod ili pozivom na 063 681 739.'],
+    ['Šta ako pada kiša?', 'Igraš pod krovom ako je slobodno, ili pomeriš termin bez naplate.'],
+    ['Može li da se igra uveče?', 'Može, tereni imaju reflektore. Kompleks radi 24 sata.'],
+    ['Iznajmljujete li rekete i loptice?', '[DOPUNITI: da li se iznajmljuje oprema i po kojoj ceni]'],
+    ['Ima li svlačionica i tuševa?', 'Ima, u zgradi, uz bar pored terena.'],
+    ['Kako se dete upisuje u školu tenisa?', '[DOPUNITI: da li postoji škola tenisa, uzrasti, trener, način upisa]'],
+    ['Gde se parkira?', 'Na parkingu ispred ulaza. Besplatan je.'],
+    ['Može li zakup celog kompleksa?', 'Može, za team building i rođendane. Cena · [DOPUNITI]']
+  ];
+
+  componentDidMount() {
+    // jezik dokumenta (SEO): postavlja se pre svega ostalog
+    document.documentElement.lang = 'sr-RS';
+    if (this.props.animacije === false) return;
+    const ease = 'cubic-bezier(.32,.72,.22,1)';
+
+    // 1. reveal: fade + rise, sa stagger-om unutar sekcije
+    const groups = new Map();
+    const pripremi = n => {
+      if (n.dataset.pripremljen === '1') return;
+      n.dataset.pripremljen = '1';
+      const g = n.closest('[data-reveal-group]') || document.body;
+      const arr = groups.get(g) || [];
+      arr.push(n);
+      groups.set(g, arr);
+      if (n.dataset.img === '1') {
+        n.style.willChange = 'clip-path, transform, opacity';
+        n.style.transition = 'clip-path 1.4s ' + ease + ', transform 1.5s ' + ease + ', opacity .7s linear';
+        n.style.clipPath = 'inset(0% 0% 100% 0%)';
+        n.style.transform = 'scale(1.05)';
+        n.style.opacity = '1';
+      } else {
+        n.style.willChange = 'opacity, transform';
+        n.style.transition = 'opacity 1.05s ' + ease + ', transform 1.05s ' + ease;
+        n.style.opacity = '0';
+        n.style.transform = 'translateY(28px)';
+      }
+    };
+    const sviReveal = () => Array.from(document.querySelectorAll('[data-reveal]'));
+    sviReveal().forEach(pripremi);
+    const delayOf = n => {
+      const arr = groups.get(n.closest('[data-reveal-group]') || document.body) || [];
+      return Math.min(arr.indexOf(n), 5) * 90;
+    };
+    const show = n => {
+      if (n.dataset.shown === '1') return;
+      n.dataset.shown = '1';
+      setTimeout(() => {
+        n.style.opacity = '1';
+        n.style.transform = 'none';
+        if (n.dataset.img === '1') n.style.clipPath = 'inset(0% 0% 0% 0%)';
+      }, delayOf(n));
+    };
+
+    // 2. brojke: count-up
+    const counters = Array.from(document.querySelectorAll('[data-count]'));
+    const runCount = el => {
+      if (el.dataset.counted === '1') return;
+      el.dataset.counted = '1';
+      const raw = el.textContent.trim();
+      const m = raw.match(/(\d[\d\s.]*)/);
+      if (!m) return;
+      const target = parseFloat(m[1].replace(/[\s.]/g, ''));
+      if (!isFinite(target) || target === 0) return;
+      const pre = raw.slice(0, m.index), post = raw.slice(m.index + m[1].length);
+      const suffix = m[1].endsWith('.') ? '.' : '';
+      const t0 = performance.now(), dur = 1100;
+      const step = now => {
+        const k = Math.min(1, (now - t0) / dur);
+        const v = Math.round(target * (1 - Math.pow(1 - k, 3)));
+        el.textContent = pre + v + suffix + post;
+        if (k < 1) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    };
+
+    // mreze: fiksan broj kolona bez praznih celija
+    const layoutGrids = () => {
+      Array.from(document.querySelectorAll('[data-cols]')).forEach(g => {
+        const opcije = g.dataset.cols.split(' ').map(Number);
+        const min = Number(g.dataset.colMin) || 260;
+        const w = g.clientWidth || 0;
+        const n = opcije.find(c => c === 1 || w >= c * min + (c - 1) * 16) || 1;
+        const tpl = 'repeat(' + n + ',minmax(0,1fr))';
+        if (g.style.gridTemplateColumns !== tpl) g.style.gridTemplateColumns = tpl;
+        Array.from(g.children).forEach(ch => {
+          if (ch.dataset.span2 === undefined && ch.style.gridColumn.indexOf('span 2') >= 0) ch.dataset.span2 = '1';
+          if (ch.dataset.span2 === '1') {
+            ch.style.gridColumn = n === 1 ? 'auto' : 'span 2';
+            ch.style.aspectRatio = n === 1 ? '16/9' : 'auto';
+          }
+        });
+      });
+    };
+    // mobilni raspored (inline stilovi, bez media query-ja)
+    const pravila = [
+      ['#vrh > div:nth-child(1)', { gridTemplateColumns: '1fr', gap: '32px', padding: '104px 20px 32px' }],
+      ['#vrh > div:nth-child(2)', { padding: '16px 20px 24px', gap: '16px' }],
+      ['#vrh h1', { whiteSpace: 'normal', fontSize: '40px', lineHeight: '1.05' }],
+      ['#vrh > div:nth-child(1) > div:nth-child(2)', { justifySelf: 'stretch', width: '100%' }],
+      ['[data-nav] nav', { gap: '16px', fontSize: '14px' }],
+      ['footer > div:nth-child(1) > div:nth-child(2)', { gridTemplateColumns: 'repeat(2,minmax(0,1fr))', gap: '32px 24px', padding: '32px 0px' }],
+      ['[data-traka] > span', { width: '180px', height: '120px' }],
+      ['footer > div:nth-child(2) > div:nth-child(2)', { fontSize: '96px', marginBottom: '0em' }],
+      // hero: donja traka sa detaljima
+      ['#vrh > div:nth-child(2)', { flexDirection: 'column', alignItems: 'flex-start', gap: '16px', padding: '16px 20px 24px' }],
+      ['#vrh > div:nth-child(2) > div:nth-child(1)', { flexDirection: 'column', alignItems: 'flex-start', gap: '8px', fontSize: '13px' }],
+      ['#vrh h1 br', { display: 'none' }],
+      ['#vrh > div:nth-child(1) p', { fontSize: '16px' }],
+      // footer
+      ['footer > div:nth-child(1)', { padding: '64px 20px 24px' }],
+      ['footer > div:nth-child(1) > div:nth-child(1)', { gridTemplateColumns: '1fr', gap: '32px', paddingBottom: '32px' }],
+      ['footer > div:nth-child(1) > div:nth-child(2)', { gap: '32px', padding: '32px 0px' }],
+      ['footer > div:nth-child(1) > div:nth-child(3)', { flexDirection: 'column', alignItems: 'flex-start', gap: '12px' }],
+      ['footer > div:nth-child(2)', { marginTop: '-40px' }],
+      ['footer > div:nth-child(2) > div:nth-child(1)', { fontSize: '10.5px', letterSpacing: '0.2em' }]
+    ];
+    // nav: taman im izadjemo iz hero sekcije (jedno mesto, da se ne ponistava)
+    const primeniNav = () => {
+      const nav = document.querySelector('[data-nav]');
+      if (!nav) return;
+      // pozadina se pojavljuje odmah, na prvi pomak skrola
+      const y = window.scrollY || document.documentElement.scrollTop || 0;
+      const past = y > 8;
+      if (nav.dataset.taman === (past ? '1' : '0')) return;
+      nav.dataset.taman = past ? '1' : '0';
+      nav.style.transition = 'background .55s ' + ease + ', border-color .55s ' + ease + ', box-shadow .55s ' + ease;
+      nav.style.borderBottom = '1px solid ' + (past ? 'rgba(255,255,255,0.10)' : 'transparent');
+      nav.style.background = past ? '#16130F' : 'transparent';
+      nav.style.backdropFilter = 'none';
+      nav.style.boxShadow = past ? '0 1px 24px rgba(12,10,8,0.18)' : 'none';
+    };
+
+    const primeniMobilni = () => {
+      const m = window.innerWidth <= 760;
+      pravila.forEach(([sel, mob]) => {
+        document.querySelectorAll(sel).forEach(el => {
+          if (el.dataset.desk === undefined) el.dataset.desk = el.getAttribute('style') || '';
+          if (m) Object.assign(el.style, mob);
+          else if (el.getAttribute('style') !== el.dataset.desk) el.setAttribute('style', el.dataset.desk);
+        });
+      });
+      document.querySelectorAll('#vrh p br').forEach(br => { br.style.display = m ? 'none' : 'inline'; });
+      // hero pocinje ispod fiksne trake, ma koliko redova imala
+      const nav = document.querySelector('[data-nav]');
+      if (nav) Object.assign(nav.style, m
+        ? { gridTemplateColumns: '1fr auto', gap: '8px', rowGap: '0px', padding: '8px 16px' }
+        : { gridTemplateColumns: 'auto 1fr auto', gap: '32px', rowGap: '0px', padding: '12px clamp(16px,4vw,56px)' });
+      const heroGrid = document.querySelector('#vrh > div:nth-child(1)');
+      this._navVisina = nav ? nav.offsetHeight : 68;
+      if (m && nav && heroGrid) heroGrid.style.paddingTop = (this._navVisina + 24) + 'px';
+      // mobilni meni umesto reda linkova
+      const linkovi = document.querySelector('[data-nav] nav');
+      const dugmeMeni = document.querySelector('[data-meni]');
+      const panel = document.querySelector('[data-meni-panel]');
+      if (linkovi) linkovi.style.display = m ? 'none' : 'flex';
+      if (dugmeMeni) dugmeMeni.style.display = m ? 'flex' : 'none';
+      if (panel) {
+        const otvoren = m && this.state.meniOtvoren;
+        panel.style.display = otvoren ? 'flex' : 'none';
+        if (m) {
+          const nv = nav ? nav.offsetHeight : 64;
+          Object.assign(panel.style, {
+            position: 'fixed',
+            top: (this.state.meniOtvoren ? nv : 0) + 'px',
+            left: '0px',
+            right: '0px',
+            gridColumn: 'auto',
+            background: '#16130F',
+            borderBottom: '1px solid rgba(255,255,255,0.14)',
+            boxShadow: '0 24px 48px rgba(12,10,8,0.32)',
+            padding: '8px 20px 20px',
+            zIndex: '49'
+          });
+        } else {
+          Object.assign(panel.style, { position: 'static', gridColumn: '1 / -1', background: 'none', boxShadow: 'none', borderBottom: 'none' });
+        }
+      }
+      const cta = document.querySelector('[data-nav] > a[href="#rezervacija"]');
+      if (cta) cta.style.display = m ? 'none' : 'inline-block';
+      // wordmark uz logo: samo na desktopu
+      const wordmark = document.querySelector('[data-nav] > a[href="#vrh"] > span:last-child');
+      if (wordmark) wordmark.style.display = m ? 'none' : 'grid';
+      // u meniju: dugme za rezervaciju na dnu
+      const meniCta = document.querySelector('[data-meni-panel] > a[href="#rezervacija"]');
+      if (meniCta) meniCta.style.display = m ? 'flex' : 'none';
+      // footer: kolone "O klubu" i "Tereni" pune sirine, "Sajt" i "Kontakt" jedna uz drugu
+      if (m) {
+        const kol = document.querySelectorAll('footer > div:nth-child(1) > div:nth-child(2) > div');
+        if (kol[0]) kol[0].style.gridColumn = '1 / -1';
+        if (kol[3]) kol[3].style.gridColumn = '1 / -1';
+      }
+
+      // dugmad u herou i footeru: puna sirina na mobilnom
+      document.querySelectorAll('#vrh a[href="#cene"], #vrh a[href="#rezervacija"], footer a[href="#rezervacija"], footer a[href^="tel:"]').forEach(a => {
+        if (a.dataset.desk === undefined) a.dataset.desk = a.getAttribute('style') || '';
+        if (m) Object.assign(a.style, { flex: '1 1 100%', minWidth: '0px', width: '100%', boxSizing: 'border-box' });
+        else if (a.getAttribute('style') !== a.dataset.desk) a.setAttribute('style', a.dataset.desk);
+      });
+      primeniNav();
+    };
+    primeniMobilni();
+    this._primeniMobilni = primeniMobilni;
+    window.addEventListener('resize', primeniMobilni);
+
+    layoutGrids();
+    this._layoutGrids = layoutGrids;
+    window.addEventListener('resize', layoutGrids);
+
+    const check = () => {
+      primeniMobilni();
+      layoutGrids();
+      const h = window.innerHeight || 800;
+      sviReveal().forEach(n => {
+        pripremi(n);
+        const r = n.getBoundingClientRect();
+        if (r.top < h * 0.88) show(n);
+      });
+      Array.from(document.querySelectorAll('[data-count]')).forEach(n => {
+        const r = n.getBoundingClientRect();
+        if (r.top < h * 0.9) runCount(n);
+      });
+      primeniNav();
+    };
+    window.addEventListener('scroll', primeniNav, { passive: true });
+    // glatko skrolovanje sa inercijom (lerp), samo mis/trackpad
+    const finoSkrolovanje = !window.matchMedia('(prefers-reduced-motion: reduce)').matches
+      && window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    if (finoSkrolovanje) {
+      let cilj = window.scrollY || 0, radi = false;
+      const maxY = () => Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+      const postavi = y => { document.documentElement.scrollTop = y; document.body.scrollTop = y; };
+      const korak = () => {
+        const trenutno = window.scrollY;
+        const razlika = cilj - trenutno;
+        if (Math.abs(razlika) < 0.6) { postavi(cilj); radi = false; return; }
+        postavi(trenutno + razlika * 0.12);
+        requestAnimationFrame(korak);
+      };
+      const naTocak = e => {
+        if (e.ctrlKey) return;
+        e.preventDefault();
+        cilj = Math.min(maxY(), Math.max(0, cilj + e.deltaY));
+        if (!radi) { radi = true; requestAnimationFrame(korak); }
+      };
+      const sinhronizuj = () => { if (!radi) cilj = window.scrollY; };
+      // linkovi u okviru stranice: ista inercijska petlja
+      const naKlik = e => {
+        const a = e.target.closest && e.target.closest('a[href^="#"]');
+        if (!a) return;
+        const id = a.getAttribute('href').slice(1);
+        const cilj_el = id ? document.getElementById(id) : null;
+        if (!cilj_el) return;
+        e.preventDefault();
+        const odmak = (this._navVisina || 68) + 16;
+        cilj = Math.min(maxY(), Math.max(0, window.scrollY + cilj_el.getBoundingClientRect().top - odmak));
+        if (!radi) { radi = true; requestAnimationFrame(korak); }
+      };
+      document.addEventListener('click', naKlik);
+      this._naKlik = naKlik;
+      window.addEventListener('wheel', naTocak, { passive: false });
+      window.addEventListener('resize', sinhronizuj);
+      document.addEventListener('keydown', sinhronizuj);
+      this._naTocak = naTocak;
+      this._sinhronizuj = sinhronizuj;
+    }
+
+    // hero: sadrzaj ulazi po redosledu pri ucitavanju
+    const hero = document.querySelector('#vrh');
+    if (hero) {
+      const uvod = Array.from(hero.querySelectorAll(':scope > div > div, :scope > div > div > div'))
+        .filter(el => el.parentElement && el.parentElement.parentElement === hero).slice(0, 3);
+      const heroDeca = Array.from(hero.children).slice(0, 3);
+      heroDeca.forEach((el, i) => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(16px)';
+        el.style.transition = 'opacity 1.15s ' + ease + ' ' + (i * 160 + 140) + 'ms, transform 1.15s ' + ease + ' ' + (i * 160 + 140) + 'ms';
+      });
+      requestAnimationFrame(() => requestAnimationFrame(() => heroDeca.forEach(el => { el.style.opacity = '1'; el.style.transform = 'none'; })));
+      void uvod;
+    }
+
+    // hero slika: lagani parallax
+    const parallax = () => {
+      if (!hero) return;
+      const y = window.scrollY || document.documentElement.scrollTop || 0;
+      if (y > window.innerHeight) return;
+      hero.style.backgroundPosition = 'center calc(50% + ' + (y * 0.12) + 'px)';
+    };
+    window.addEventListener('scroll', parallax, { passive: true });
+    this._parallax = parallax;
+
+    this._check = check;
+    requestAnimationFrame(() => requestAnimationFrame(check));
+    window.addEventListener('scroll', check, { passive: true, capture: true });
+    document.addEventListener('scroll', check, { passive: true, capture: true });
+    window.addEventListener('resize', check);
+    this._tick = setInterval(check, 250);
+    if (!('IntersectionObserver' in window)) {
+      this._safety = setTimeout(() => sviReveal().forEach(n => { n.style.opacity = '1'; n.style.transform = 'none'; n.style.clipPath = 'none'; }), 1200);
+    }
+  }
+
+  componentWillUnmount() {
+    clearInterval(this._tick);
+    clearTimeout(this._safety);
+    if (this._check) {
+      window.removeEventListener('scroll', this._check, { capture: true });
+      document.removeEventListener('scroll', this._check, { capture: true });
+      window.removeEventListener('resize', this._check);
+      if (this._layoutGrids) window.removeEventListener('resize', this._layoutGrids);
+      if (this._parallax) window.removeEventListener('scroll', this._parallax);
+      if (this._naTocak) window.removeEventListener('wheel', this._naTocak);
+      if (this._naKlik) document.removeEventListener('click', this._naKlik);
+      if (this._primeniMobilni) window.removeEventListener('resize', this._primeniMobilni);
+      if (this._sinhronizuj) {
+        window.removeEventListener('resize', this._sinhronizuj);
+        document.removeEventListener('keydown', this._sinhronizuj);
+      }
+    }
+  }
+
+  renderVals() {
+    const vise = this.state.viseSlika;
+    // avgust 2026: 1. je subota -> 5 praznih polja na pocetku
+    const zauzeti = [3, 8, 9, 15, 21, 22, 27];
+    const izabran = 13;
+    const daniKalendara = [];
+    for (let i = 0; i < 5; i++) daniKalendara.push({ broj: '', pozadina: 'transparent', boja: 'transparent', tezina: 400, kursor: 'default' });
+    for (let d = 1; d <= 31; d++) {
+      const jeIzabran = d === izabran, jeZauzet = zauzeti.indexOf(d) >= 0;
+      daniKalendara.push({
+        broj: String(d),
+        pozadina: jeIzabran ? '#C4552A' : jeZauzet ? '#FFFFFF' : '#F1EDE7',
+        boja: jeIzabran ? '#FFFFFF' : jeZauzet ? 'rgba(22,19,15,0.28)' : '#16130F',
+        tezina: jeIzabran ? 700 : 500,
+        kursor: jeZauzet ? 'default' : 'pointer'
+      });
+    }
+    const zauzetiSati = ['09:00', '18:00'];
+    const izabranSat = '19:00';
+    const termini = ['08:00', '09:00', '10:00', '17:00', '18:00', '19:00', '20:00', '21:00'].map(sat => {
+      const jeIzabran = sat === izabranSat, jeZauzet = zauzetiSati.indexOf(sat) >= 0;
+      return {
+        sat,
+        pozadina: jeIzabran ? '#16130F' : jeZauzet ? '#F7F5F2' : '#FFFFFF',
+        boja: jeIzabran ? '#FFFFFF' : jeZauzet ? 'rgba(22,19,15,0.32)' : '#16130F',
+        ivica: jeIzabran ? '#16130F' : 'rgba(22,19,15,0.12)'
+      };
+    });
+    const pitanja = Component.PITANJA.map(([naslov, tekst], i) => ({
+      naslov, tekst,
+      redni: String(i + 1).padStart(2, '0'),
+      znak: this.state.otvoreno === i ? '−' : '+',
+      redovi: this.state.otvoreno === i ? '1fr' : '0fr',
+      prozirnost: this.state.otvoreno === i ? 1 : 0,
+      pomeraj: this.state.otvoreno === i ? '0px' : '-6px',
+      klik: () => this.setState(s => ({ otvoreno: s.otvoreno === i ? -1 : i }))
+    }));
+    return {
+      znakMenija: this.state.meniOtvoren ? '✕' : '☰',
+      toggleMeni: () => this.setState(s => ({ meniOtvoren: !s.meniOtvoren }), () => this._primeniMobilni && this._primeniMobilni()),
+      zatvoriMeni: () => this.setState({ meniOtvoren: false }, () => this._primeniMobilni && this._primeniMobilni()),
+      pitanja,
+      daniKalendara,
+      termini,
+      prikaziBlog: this.props.prikaziBlog ?? true,
+      prikaziTurnire: this.props.prikaziTurnire ?? true,
+      viseSlika: vise,
+      mejlPrijava: this.state.mejlPrijava,
+      prijavaPoslata: this.state.prijavaPoslata,
+      prijavaOtvorena: !this.state.prijavaPoslata,
+      promeniMejl: e => this.setState({ mejlPrijava: e.target.value }),
+      posaljiPrijavu: e => { e.preventDefault(); this.setState({ prijavaPoslata: true }); },
+      tekstVise: vise ? 'Prikaži manje' : 'Još slika',
+      strelicaVise: vise ? '↑' : '↓',
+      toggleVise: () => this.setState(s => ({ viseSlika: !s.viseSlika }), () => this._check && this._check())
+    };
+  }
+}
+</script>
 </body>
 </html>

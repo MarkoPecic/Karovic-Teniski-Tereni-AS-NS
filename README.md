@@ -8,8 +8,7 @@ postavljaju na hosting takvi kakvi su.
     index.html        markup svih sekcija (inline stilovi, vidi napomenu)
     404.html          stranica za nepostojece adrese
     css/style.css     globalna pravila: reset, prelazi, stanja linkova, keyframes
-    js/main.js        logika: animacije, mobilni raspored, kalendar, FAQ, meni
-    js/support.js     runtime koji vezuje js/main.js za markup u index.html
+    js/support.js     runtime; logika sajta je ugradjena na dnu index.html
     slike/            fotografije
     robots.txt        dozvole za pretrazivace i AI botove
     sitemap.xml       mapa sajta
@@ -29,7 +28,10 @@ Raspored i boje su u `style` atributima, a ne u CSS klasama, da bi se
 stranica iscrtala odmah pri ucitavanju, bez cekanja na stylesheet. U
 `css/style.css` je samo ono sto inline ne moze: reset, prelazi, `:hover`,
 `@keyframes`. Mobilni raspored ne ide kroz media query nego kroz listu
-`pravila` u `js/main.js` (jedno mesto za sve mobilne izmene).
+`pravila` u skripti na dnu `index.html` (jedno mesto za sve mobilne izmene).
+
+Logika ne moze u spoljni fajl: runtime u `js/support.js` cita `<script
+data-dc-script>` iz same stranice.
 
 ## Gde se sta menja
 
@@ -37,10 +39,10 @@ stranica iscrtala odmah pri ucitavanju, bez cekanja na stylesheet. U
 |---|---|---|
 | Tekst sekcije | index.html | komentar sa nazivom sekcije iznad nje |
 | Cene | index.html | sekcija `#cene` |
-| Pitanja u FAQ | js/main.js | `Component.PITANJA` |
-| Kalendar (zauzeti dani, termini) | js/main.js | `renderVals()` |
-| Mobilni raspored | js/main.js | lista `pravila` |
-| Boja fiksne trake | js/main.js | `primeniNav()` |
+| Pitanja u FAQ | index.html | `Component.PITANJA` u skripti na dnu |
+| Kalendar (zauzeti dani, termini) | index.html | `renderVals()` u skripti na dnu |
+| Mobilni raspored | index.html | lista `pravila` u skripti na dnu |
+| Boja fiksne trake | index.html | `primeniNav()` u skripti na dnu |
 | Fotografije | slike/ | zameniti fajl istog imena |
 | SEO, Open Graph, JSON-LD | index.html | `<head>` |
 
